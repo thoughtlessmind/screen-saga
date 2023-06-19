@@ -1,5 +1,6 @@
 "use client";
 
+import { themes } from "@/src/app/providers";
 import { useTheme } from "next-themes";
 import { ButtonHTMLAttributes, ReactNode, useEffect, useState } from "react";
 
@@ -9,7 +10,7 @@ const Button = ({
 }: { children: ReactNode } & ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <button
-      className="bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600 rounded px-2 py-1 text-xs font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+      className="rounded bg-indigo-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       {...restProps}
     >
       {children}
@@ -34,11 +35,12 @@ const ThemeChanger = () => {
       <p>The current theme is: {theme}</p>
       <Button onClick={() => setTheme("system")}>System</Button>
       <br />
-      <Button onClick={() => setTheme("light")}>Light Mode</Button>
-      <br />
-      <Button onClick={() => setTheme("dark")}>Dark Mode</Button>
-      <br />
-      <Button onClick={() => setTheme("aqua")}>Aqua</Button>
+      {themes.map((theme) => (
+        <>
+          <Button onClick={() => setTheme(theme)}>{theme} Mode</Button>
+          <br />
+        </>
+      ))}
     </div>
   );
 };

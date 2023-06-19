@@ -1,4 +1,29 @@
+const { blackA, whiteA } = require("@radix-ui/colors");
+const colors = require("tailwindcss/colors");
+
 /** @type {import('tailwindcss').Config} */
+
+// function generateScaleOld(name) {
+//   let scale = Array.from({ length: 12 }, (_, i) => {
+//     let id = i + 1;
+//     return [
+//       [id, `var(--${name}${id})`],
+//       [`a${id}`, `var(--${name}${id})`],
+//     ];
+//   }).flat();
+
+//   return Object.fromEntries(scale);
+// }
+
+function generateScale() {
+  let scale = Array.from({ length: 12 }, (_, i) => {
+    let id = i + 1;
+    return [[id, `var(--color${id})`], [`var(--color${id})`]];
+  }).flat();
+
+  return Object.fromEntries(scale);
+}
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -18,6 +43,10 @@ module.exports = {
       primary: {
         DEFAULT: "var(--primary)",
       },
+      ...blackA,
+      ...whiteA,
+      ...colors,
+      color: generateScale(),
     },
   },
   plugins: [],
